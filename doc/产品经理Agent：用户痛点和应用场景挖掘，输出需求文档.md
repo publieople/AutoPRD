@@ -1,6 +1,4 @@
-
-
-## 产品经理Agent：用户痛点和应用场景挖掘，输出需求文档
+# 产品经理 Agent：用户痛点和应用场景挖掘，输出需求文档
 
 背景与价值
 
@@ -21,9 +19,7 @@ PM 小美负责一款 ToC 的移动应用。每天，她都会收到来自 App S
 真实工作流：模拟真实互联网产品迭代流程，考察 AI 在复杂职场任务中的落地价值。
 
 - 结构化输出：考察 Agent 将非结构化自然语言转化为高度结构化、工程化文档（PRD）的能力。
-考察点
-
-
+  考察点
 
 <table><tr><td>维度</td><td>考察内容</td></tr><tr><td>洞察深度</td><td>能否透过用户表述（User Voice）挖掘出底层动机（User Needs）。</td></tr><tr><td>场景建模</td><td>能否还原用户产生问题的具体时空场景（Context &amp; Scenario）。</td></tr><tr><td>决策逻辑</td><td>能够基于频率、影响面和商业价值对需求进行优先级排序 (ICE/RISE 模型)。</td></tr><tr><td>文档规范</td><td>生成的 PRD 是否符合行业标准，逻辑闭环，无歧义。</td></tr></table>
 
@@ -79,9 +75,9 @@ PM 小美负责一款 ToC 的移动应用。每天，她都会收到来自 App S
 
 ## 输出格式
 
-选手需提交 outputs/prd _ result.md 或 json。
+选手需提交 outputs/prd \_ result.md 或 json。
 
-## prd _ result.json 示例:
+## prd \_ result.json 示例:
 
 ```python
 代码块
@@ -127,12 +123,10 @@ Good Case: Agent 分析出 “加载慢” 导致了 “社交炫耀心理受挫
 
 PRD 完整性：输出的 PRD 必须包含：背景 (Background)、用户故事 (User Stories)、功能需求 (Functional ReqS)、验收标准 (Acceptance Criteria)。
 
-## 评分标准（100分）
+## 评分标准（100 分）
 
 <table><tr><td>维度</td><td>分值</td><td>说明</td></tr><tr><td>痛点归因准确度</td><td>30</td><td>能准确认别 feedback 中的核心矛盾，不被情绪化语言误导。</td></tr><tr><td>场景建模能力</td><td>20</td><td>能夠構建出真實、具體的用戶使用場景，而非泛泛而談。</td></tr><tr><td>解决方案可行性</td><td>20</td><td>提出的功能需求在技术和商业上是合理的，非天马行空。</td></tr><tr><td>PRD 结构规范</td><td>30</td><td>文档结构严谨，字段齐全，可直接交付给开发人员阅读。</td></tr></table>
 
 ## 难度梯度
-
-
 
 <table><tr><td>等级</td><td>目标分</td><td>达成条件</td></tr><tr><td>入门</td><td>60分</td><td>能对用户反馈进行分类（如：Bug、建议、咨询），并生成简单的功能列表。</td></tr><tr><td>进阶</td><td>80分</td><td>能识别高价值痛点，按照标准格式输出 PRD，包含基本的用户故事。</td></tr><tr><td>挑战</td><td>95分+</td><td>能结合用户画像进行差异化分析，挖掘出潜在的创新机会（而不仅仅是修 Bug），并定义出完善的数据埋点指标。</td></tr></table>
