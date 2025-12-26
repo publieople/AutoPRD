@@ -17,8 +17,9 @@
 - **核心模型**: DeepSeek-V3.2 (通过胜算云 API 调用)
 - **开发语言**: Python 3.10+
 - **框架/工具**:
-  - 基础 HTTP 请求库 (requests/httpx)
-  - 数据处理 (pandas/json)
+  - **包管理**: uv
+  - **LLM SDK**: openai (兼容 DeepSeek API)
+  - **数据处理**: pandas, pydantic
   - _注：本项目严格遵守单模型约束，核心逻辑仅调用 DeepSeek-V3.2。_
 
 ## 3. 项目结构
@@ -39,10 +40,43 @@ AutoPRD/
 │   ├── system_design.md         # 系统设计
 │   └── data_schema.md           # 数据规范
 ├── main.py                 # 程序启动入口
-├── requirements.txt        # 依赖清单
+├── pyproject.toml          # 项目配置与依赖
+├── uv.lock                 # 依赖锁定文件
+├── .env.example            # 环境变量示例
 └── README.md               # 项目说明
 ```
 
 ## 4. 快速开始
 
-_(待开发完成后补充具体运行指令)_
+### 环境准备
+
+本项目使用 `uv` 进行依赖管理。
+
+1. **安装 uv** (如果尚未安装):
+
+    ```bash
+    # Windows (PowerShell)
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+    # macOS/Linux
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+2. **初始化环境**:
+
+    ```bash
+    uv sync
+    ```
+
+3. **配置环境变量**:
+    复制 `.env.example` 为 `.env` 并填入 API Key。
+
+    ```bash
+    cp .env.example .env
+    ```
+
+### 运行项目
+
+```bash
+uv run main.py
+```
