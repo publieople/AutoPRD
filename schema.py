@@ -18,8 +18,10 @@ class InputData(BaseModel):
 
 class PainPoint(BaseModel):
     pain_point: str = Field(..., description="核心痛点")
-    root_cause: str = Field(..., description="根本原因")
-    scenario: str = Field(..., description="发生场景")
+    root_cause: str = Field(..., description="根本原因 (Technical & Product)")
+    underlying_motivation: str = Field(..., description="深层动机 (Psychological & Social)")
+    scenario: str = Field(..., description="发生场景 (Who, When, Where, What)")
+    innovation_opportunity: str = Field(..., description="创新机会 (Beyond just fixing bugs)")
     priority: str = Field(..., description="优先级 (e.g., P0, P1)")
 
 class FunctionalRequirement(BaseModel):

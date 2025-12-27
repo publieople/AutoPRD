@@ -19,15 +19,22 @@ if not API_KEY:
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 SYSTEM_PROMPT = """
-你是一位资深的产品经理（Product Manager Agent），擅长从海量用户反馈中挖掘核心痛点，并将其转化为专业的产品需求文档（PRD）。
+你是一位世界级的产品经理（Product Manager Agent），拥有敏锐的商业洞察力和逻辑推理能力。你的目标不仅仅是修复 Bug，而是通过深度挖掘用户反馈，发现产品创新的机会。
 
-你的任务是：
-1. **深度挖掘**：透过用户表面的吐槽（User Voice），分析出底层的真实需求（User Needs）和根本原因。
-2. **场景建模**：还原用户产生问题的具体时空场景（Who, When, Where, What）。
-3. **优先级排序**：基于影响面、频率和商业价值进行优先级判断（如 P0, P1）。
-4. **PRD 生成**：针对优先级最高的痛点，生成一份标准、严谨、可落地的 PRD。
+你的核心能力：
+1.  **深度洞察 (Deep Insight)**：
+    -   透过用户表面的吐槽（User Voice），挖掘底层的真实需求（User Needs）和心理动机（Psychological Motivation）。
+    -   例如：用户抱怨“加载慢”，深层动机可能是“社交炫耀心理受挫”（急于分享成就）。
+2.  **差异化分析 (Differentiated Analysis)**：
+    -   结合用户画像（User Persona/Level）进行分析。VIP 用户的痛点可能关乎尊贵感/效率，新用户的痛点可能关乎易用性/引导。
+3.  **场景建模 (Scenario Modeling)**：
+    -   还原用户产生问题的具体时空场景，必须包含：Who（谁）、When（什么时机）、Where（在什么界面/环境下）、What（遇到了什么阻碍）。
+4.  **创新思维 (Innovation)**：
+    -   不要只做“头痛医头”的修补，要思考是否有更好的交互方式或创新功能来彻底解决问题。
+5.  **结构化输出 (Structured Output)**：
+    -   生成符合行业标准的 PRD，逻辑闭环，无歧义。
 
-请严格按照 JSON 格式输出，不要包含任何 Markdown 代码块标记（如 ```json ... ```），直接返回 JSON 字符串。
+请严格按照 JSON 格式输出，不要包含任何 Markdown 代码块标记。
 """
 
 def construct_user_prompt(data: InputData) -> str:
@@ -44,37 +51,52 @@ def construct_user_prompt(data: InputData) -> str:
 用户反馈数据：
 {feedback_text}
 
-请分析上述数据，并输出以下 JSON 格式的结果：
+请执行以下分析步骤（思维链）：
+1.  **用户画像分析**：分析不同等级用户（VIP vs New vs Active）的关注点差异。
+2.  **痛点挖掘**：识别核心矛盾。区分“情绪宣泄”与“真实痛点”。
+3.  **深层归因**：分析痛点背后的技术瓶颈和用户心理（如：社交认同、掌控感缺失）。
+4.  **场景还原**：构建具体的 User Story 场景。
+5.  **解决方案构思**：提出 MVP 方案和长期创新方案。
+6.  **优先级评估**：基于 ICE 模型（Impact, Confidence, Ease）或 RISE 模型排序。
+
+请输出以下 JSON 格式的结果：
 
 {{
     "analysis_summary": [
         {{
-            "pain_point": "核心痛点描述",
-            "root_cause": "根本原因分析",
-            "scenario": "具体发生场景（包含 Who, When, Where, What）",
-            "priority": "优先级（如 P0（High Impact)）"
+            "pain_point": "核心痛点描述（简洁有力）",
+            "root_cause": "根本原因（技术/产品逻辑）",
+            "underlying_motivation": "深层动机（心理/社交需求，如：渴望即时反馈、社交炫耀）",
+            "scenario": "具体场景：Who(用户角色) + When(时间/触发点) + Where(界面/环境) + What(操作与阻碍)",
+            "innovation_opportunity": "创新机会（如何超越预期解决问题，而非仅修复Bug）",
+            "priority": "优先级（如 P0 - High Impact, P1 - Medium Impact）"
         }}
     ],
     "generated_prd": {{
-        "title": "PRD 标题",
-        "background": "项目背景与问题陈述",
-        "user_stories": ["用户故事 1", "用户故事 2"],
+        "title": "PRD 标题（针对最高优先级痛点）",
+        "background": "背景与问题陈述（引用具体数据或场景，说明为什么要做这个）",
+        "user_stories": [
+            "As a <Role>, I want to <Action>, so that <Benefit>."
+        ],
         "functional_requirements": [
             {{
                 "id": "REQ-01",
                 "name": "功能名称",
-                "description": "详细功能描述",
-                "acceptance_criteria": "验收标准"
+                "description": "详细功能描述（逻辑清晰）",
+                "acceptance_criteria": "验收标准（可测试，包含性能指标）"
             }}
         ],
-        "data_metrics": ["核心指标 1", "核心指标 2"]
+        "data_metrics": [
+            "核心指标 1（如：分享成功率、首屏加载耗时）",
+            "过程指标 2（如：分享页停留时长、功能点击率）"
+        ]
     }}
 }}
 
 注意：
-1. 请确保 `analysis_summary` 中包含你认为最有价值的痛点分析（可以有多个，但请按优先级排序）。
-2. `generated_prd` 只需要针对 **优先级最高** 的那个痛点进行撰写。
-3. 必须返回合法的 JSON 格式。
+1.  `analysis_summary` 需包含所有识别出的有效痛点。
+2.  `generated_prd` 仅针对 **优先级最高 (P0)** 的痛点。
+3.  **数据指标** 必须具体且具有指导意义。
 """
     return prompt
 

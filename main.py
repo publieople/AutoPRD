@@ -18,29 +18,31 @@ def save_markdown_output(output: OutputData, file_path: str):
     prd = output.generated_prd
     md_content = f"# {prd.title}\n\n"
 
-    md_content += "## 1. 背景与问题 (Background)\n"
+    md_content += "## 1. 背景与问题 (Background)\n\n"
     md_content += f"{prd.background}\n\n"
 
-    md_content += "## 2. 痛点分析 (Pain Point Analysis)\n"
+    md_content += "## 2. 痛点分析 (Pain Point Analysis)\n\n"
     # Assuming the first one is the one we generated PRD for, or list all
     for idx, pp in enumerate(output.analysis_summary):
-        md_content += f"### 痛点 {idx+1}: {pp.pain_point}\n"
+        md_content += f"### 痛点 {idx+1}: {pp.pain_point}\n\n"
         md_content += f"- **根本原因**: {pp.root_cause}\n"
+        md_content += f"- **深层动机**: {pp.underlying_motivation}\n"
         md_content += f"- **场景**: {pp.scenario}\n"
+        md_content += f"- **创新机会**: {pp.innovation_opportunity}\n"
         md_content += f"- **优先级**: {pp.priority}\n\n"
 
-    md_content += "## 3. 用户故事 (User Stories)\n"
+    md_content += "## 3. 用户故事 (User Stories)\n\n"
     for story in prd.user_stories:
         md_content += f"- {story}\n"
     md_content += "\n"
 
-    md_content += "## 4. 功能需求 (Functional Requirements)\n"
+    md_content += "## 4. 功能需求 (Functional Requirements)\n\n"
     for req in prd.functional_requirements:
-        md_content += f"### {req.id} - {req.name}\n"
+        md_content += f"### {req.id} - {req.name}\n\n"
         md_content += f"**描述**: {req.description}\n\n"
         md_content += f"**验收标准**: {req.acceptance_criteria}\n\n"
 
-    md_content += "## 5. 数据指标 (Data Metrics)\n"
+    md_content += "## 5. 数据指标 (Data Metrics)\n\n"
     for metric in prd.data_metrics:
         md_content += f"- {metric}\n"
 
