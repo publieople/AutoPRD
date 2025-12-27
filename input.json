@@ -1,0 +1,29 @@
+{
+    "product_info": {
+        "name": "HealthTrack Pro",
+        "description": "一款专注于跑步和饮食记录的健康管理 App。"
+    },
+    "feedback_data": [
+        {
+            "id": "F001",
+            "source": "AppStore Review",
+            "user_level": "VIP",
+            "content": "每次跑完步想分享到朋友圈，生成的长图都要加载半天，太扫兴了，不想发了。",
+            "timestamp": "2024-05-20 08:30"
+        },
+        {
+            "id": "F002",
+            "source": "Customer Service",
+            "user_level": "New User",
+            "content": "找不到哪里记录早餐的热量，功能藏得太深。",
+            "timestamp": "2024-05-20 09:15"
+        },
+        {
+            "id": "F003",
+            "source": "User Interview",
+            "user_level": "Active",
+            "content": "希望能有个功能自动识别我的食物热量，手动输入太累了，坚持不下来。",
+            "timestamp": "2024-05-20 10:00"
+        }
+    ]
+}
